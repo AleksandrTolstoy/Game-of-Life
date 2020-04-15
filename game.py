@@ -40,10 +40,7 @@ def plotter(dots: BoardType, grid_size: int = 10) -> None:
     image = ''
     for colomn in range(-grid_size, grid_size + 1):
         for row in range(grid_size, -(grid_size + 1), -1):
-            if (colomn, row) in dots:
-                image += '*'
-            else:
-                image += ' '
+            image += '*' if (colomn, row) in dots else ' '
         image += '\n'
     drawer(image)
 
