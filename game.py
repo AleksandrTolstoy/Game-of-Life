@@ -2,8 +2,10 @@
 # -*- coding: utf8 -*-
 
 import os
+import csv
 import itertools
-from typing import *
+from functools import reduce
+from typing import Tuple, Set, Iterator
 
 from termcolor import colored
 
@@ -29,24 +31,36 @@ def advance(board: BoardType) -> BoardType:
     return new_state
 
 
-def drawer(image: str, sleep_time: float = 0.15) -> None:
+def drawer(image: str, sleep_time: float = 0.3) -> None:
     os.system('clear')
     image = colored(f"{image}", "magenta", attrs=["bold"])
     os.system(f'echo "{image}"')
     os.system(f'sleep {sleep_time}')
 
 
-def plotter(dots: BoardType, grid_size: int = 10) -> None:
+def plotter(dots: BoardType, grid_size: int = 8, terminal_size: CellType = (80, 24)) -> None:
     image = ''
     for colomn in range(-grid_size, grid_size + 1):
         for row in range(grid_size, -(grid_size + 1), -1):
             image += '*' if (colomn, row) in dots else ' '
         image += '\n'
-    drawer(image)
+
+    image = image.split('\n')
+    centre_x, centre_y = map(lambda x: int(x/2), terminal_size)
+    bias_x = centre_x - len(image[0]) // 2
+    centre = reduce(lambda image, line: image + (' ' * bias_x + line + '\n'), image, '')
+
+    bias_y = centre_y - len(image) // 2
+    drawer(''.join(['\n'*bias_y, centre, '\n'*(bias_y-2)]))
 
 
 if __name__ == '__main__':
-    data = {(0, 0), (-1, 1), (1, -1), (0, 0), (-1, -1), (1, 1), (0, 0), (0, 1), (0, -1), (-1, 0), (0, 0), (1, 0)}
+    data = set()
+    with open('data/pulsar.csv', 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            x, y = map(lambda pos: int(pos), row.values())
+            data.add((x, y))
 
     while data:
         data = advance(data)
