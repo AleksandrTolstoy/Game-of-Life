@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!venv/bin/python
 # -*- coding: UTF-8 -*-
 
 import os
@@ -32,8 +32,8 @@ def advance(board: BoardType) -> BoardType:
 
 
 def drawer(image: str, sleep_time: float = 0.3) -> None:
-    os.system('clear')
-    image = colored(f"{image}", "magenta", attrs=["bold"])
+    os.system('tput reset')
+    image = colored(f'{image}', 'magenta', attrs=['bold'])
     os.system(f'echo "{image}"')
     os.system(f'sleep {sleep_time}')
 
