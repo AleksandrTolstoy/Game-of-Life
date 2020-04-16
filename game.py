@@ -1,5 +1,5 @@
-#!venv/bin/python3
-# -*- coding: utf8 -*-
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 
 import os
 import csv
