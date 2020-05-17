@@ -24,7 +24,7 @@ devised by the British mathematician John Horton Conway in 1970.
 | **-n+1** |        |        |        |        |        |        |       |
 | **-n**   |        |        |        |        |        |        |       |
 
-You should fill new ```.csv``` table in ```data``` folder  
+You should fill new ```.csv``` table in ```data``` folder to use the new simulation  
 For example __*__ has position ```n, n-1```
 
 # Sample of execution 
